@@ -1,69 +1,197 @@
 <!DOCTYPE html>
-<html lang="es">
+<!--
+  ============================================================
+  PATAGONIA INFINITA · Página de links (estilo Linktree)
+  ============================================================
+  Archivo único y autocontenido: subilo como "index.html" a la raíz
+  de un repositorio de GitHub y activá GitHub Pages.
+
+  Estructura del archivo:
+    1. <head>  → configuración, título, tipografías y estilos (CSS)
+    2. <body>  → banda amarilla, logo, lista de links y pie de página
+
+  Para editar lo más común:
+    - Textos y links  → buscá "SECCIÓN LINKS" más abajo
+    - Colores         → buscá ":root" en el CSS (variables de color)
+    - Tipografías     → buscá "--serif" y "--cond" en el CSS
+-->
+<html lang="en"> <!-- Idioma de la página: inglés (ayuda a buscadores y lectores de pantalla) -->
 <head>
+
+<!-- Codificación de caracteres: permite tildes, ñ, etc. -->
 <meta charset="utf-8">
+<!-- Hace que la página se adapte al ancho del celular.
+     "viewport-fit=cover" deja usar toda la pantalla en celulares con notch (muesca). -->
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Título que aparece en la pestaña del navegador y en Google -->
 <title>Patagonia Infinita · Kayak &amp; Adventure</title>
-<meta name="description" content="Kayak y aventura en Villa La Angostura. Encontrá todos los canales de contacto de Patagonia Infinita.">
+<!-- Descripción corta que Google y las redes muestran al compartir el link -->
+<meta name="description" content="Kayak and adventure in Villa La Angostura, Patagonia. Find all the ways to reach Patagonia Infinita.">
+<!-- Color de la barra del navegador en celulares (amarillo de marca, Pantone 116 C) -->
 <meta name="theme-color" content="#FFCE02">
+<!-- Tipografías desde Google Fonts:
+     - Cinzel          → reemplaza a TrajanPro (títulos de los botones)
+     - Roboto Condensed → reemplaza a Helvetica Neue Condensed (textos secundarios)
+     Los 2 "preconnect" aceleran la descarga de las fuentes. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Roboto+Condensed:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   1. VARIABLES DE MARCA
+   Todos los colores y fuentes se definen acá una sola vez y se
+   usan en el resto del CSS con var(--nombre).
+   Fuente: Guía de Estilos de Patagonia Infinita.
+   ============================================================ */
 :root{
-  --amarillo:#FFCE02;      /* Pantone 116 C */
-  --ocre:#D19F2A;          /* Pantone 7555 C */
-  --ambar:#EAAA21;         /* Pantone 124 C */
-  --bronce:#A17528;        /* Pantone 132 C */
-  --negro:#231F20;         /* Pantone Black C */
-  --negro-2:#2D2829;
-  --texto:#F6F1E4;
+  --amarillo:#FFCE02;      /* Pantone 116 C  → color principal */
+  --ocre:#D19F2A;          /* Pantone 7555 C → detalles secundarios */
+  --ambar:#EAAA21;         /* Pantone 124 C  → hover del botón principal */
+  --bronce:#A17528;        /* Pantone 132 C  → bordes de los botones */
+  --negro:#231F20;         /* Pantone Black C → fondo de la página */
+  --negro-2:#2D2829;       /* negro un poco más claro → fondo de los botones */
+  --texto:#F6F1E4;         /* blanco cálido para los textos */
+
+  /* Tipografías: si la primera no carga, usa la siguiente de la lista */
   --serif:"Cinzel","Trajan Pro","Times New Roman",serif;
   --cond:"Roboto Condensed","Helvetica Neue Condensed","Arial Narrow",Arial,sans-serif;
-  color-scheme:dark;
-}
-*,*::before,*::after{box-sizing:border-box}
-html{height:100%;background:var(--negro);scroll-padding-top:env(safe-area-inset-top,0px)}
-:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-body{margin:0;min-height:100%;background:var(--negro);color:var(--texto);font-family:var(--cond);font-weight:400;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--amarillo);z-index:10}
 
+  color-scheme:dark;       /* le avisa al navegador que la página es oscura */
+}
+
+/* ============================================================
+   2. BASE
+   ============================================================ */
+/* Hace que el padding y el borde cuenten dentro del ancho de cada elemento */
+*,*::before,*::after{box-sizing:border-box}
+
+/* Fondo oscuro también si el usuario "rebota" la pantalla al hacer scroll */
+html{height:100%;background:var(--negro);scroll-padding-top:env(safe-area-inset-top,0px)}
+
+/* Márgenes de seguridad en celulares con notch (en computadora valen 0) */
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+/* Estilo general del texto y fondo */
+body{
+  margin:0;
+  min-height:100%;
+  background:var(--negro);
+  color:var(--texto);
+  font-family:var(--cond);
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;   /* texto más suave en Mac/iPhone */
+}
+
+/* Franja amarilla fija arriba del todo, detrás del notch del celular */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0 0 auto;
+  height:env(safe-area-inset-top,0px);
+  background:var(--amarillo);
+  z-index:10;
+}
+
+/* ============================================================
+   3. BANDA AMARILLA SUPERIOR (decoración con curvas de kayak)
+   ============================================================ */
 .banda{position:relative;height:104px;background:var(--amarillo);overflow:hidden}
 .banda svg{position:absolute;right:-30px;top:0;height:100%;width:auto;min-width:420px}
 
+/* ============================================================
+   4. CONTENEDOR PRINCIPAL Y LOGO
+   ============================================================ */
+/* Columna centrada, máximo 460px de ancho (como un Linktree) */
 main{max-width:460px;margin:0 auto;padding:0 20px 40px}
+
+/* Logo: ocupa hasta 360px de ancho, centrado */
 .logo{display:block;width:min(100%,360px);height:auto;margin:22px auto 6px}
 
+/* ============================================================
+   5. LISTA DE BOTONES (LINKS)
+   ============================================================ */
+/* La lista: sin viñetas, un botón debajo del otro con 12px de separación */
 .links{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+
+/* Botón base (todos los links): píldora oscura con borde bronce */
 .link{
-  display:flex;align-items:center;gap:14px;width:100%;
-  padding:12px 16px 12px 12px;border-radius:999px;text-decoration:none;
-  color:var(--texto);background:var(--negro-2);border:1.5px solid var(--bronce);
-  transition:background-color .18s,border-color .18s,color .18s,transform .18s;
+  display:flex;                 /* ícono a la izquierda, texto a la derecha */
+  align-items:center;
+  gap:14px;
+  width:100%;
+  padding:12px 16px 12px 12px;
+  border-radius:999px;          /* bordes totalmente redondeados */
+  text-decoration:none;         /* sin subrayado */
+  color:var(--texto);
+  background:var(--negro-2);
+  border:1.5px solid var(--bronce);
+  transition:background-color .18s,border-color .18s,color .18s,transform .18s; /* animación suave al pasar el mouse */
 }
-.link .ico{flex:none;width:44px;height:44px;border-radius:50%;background:var(--amarillo);color:var(--negro);display:grid;place-items:center;transition:background-color .18s}
-.link .ico svg{width:22px;height:22px}
+
+/* Círculo amarillo que contiene el ícono (igual a los círculos de la paleta de la guía) */
+.link .ico{
+  flex:none;
+  width:44px;height:44px;
+  border-radius:50%;
+  background:var(--amarillo);
+  color:var(--negro);           /* el ícono usa este color (fill="currentColor") */
+  display:grid;place-items:center;
+  transition:background-color .18s;
+}
+.link .ico svg{width:22px;height:22px}   /* tamaño por defecto del ícono */
+
+/* Bloque de texto del botón (título + subtítulo, uno debajo del otro) */
 .link .txt{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+
+/* Título del botón: tipografía Cinzel, amarillo */
 .link .t{font-family:var(--serif);font-weight:600;font-size:1.02rem;letter-spacing:.02em;color:var(--amarillo);transition:color .18s}
+
+/* Subtítulo del botón: tipografía condensada, gris claro */
 .link .s{font-size:.95rem;font-weight:300;letter-spacing:.03em;color:#d9d2c1;overflow-wrap:anywhere;transition:color .18s}
+
+/* HOVER (mouse encima) y FOCUS (navegación con teclado):
+   el botón se rellena de amarillo y se levanta 1px */
 .link:hover,.link:focus-visible{background:var(--amarillo);border-color:var(--amarillo);transform:translateY(-1px)}
-.link:hover .t,.link:focus-visible .t,.link:hover .s,.link:focus-visible .s{color:var(--negro)}
-.link:hover .ico,.link:focus-visible .ico{background:var(--negro);color:var(--amarillo)}
+.link:hover .t,.link:focus-visible .t,
+.link:hover .s,.link:focus-visible .s{color:var(--negro)}                    /* textos pasan a negro */
+.link:hover .ico,.link:focus-visible .ico{background:var(--negro);color:var(--amarillo)}  /* ícono invertido */
+
+/* Contorno blanco visible para quien navega con teclado (accesibilidad) */
 .link:focus-visible{outline:3px solid var(--texto);outline-offset:3px}
+
+/* Botón PRINCIPAL (Website): relleno amarillo permanente */
 .link.principal{background:var(--amarillo);border-color:var(--amarillo)}
 .link.principal .t,.link.principal .s{color:var(--negro)}
 .link.principal .ico{background:var(--negro);color:var(--amarillo)}
 .link.principal:hover,.link.principal:focus-visible{background:var(--ambar);border-color:var(--ambar)}
 
+/* ============================================================
+   6. PIE DE PÁGINA
+   ============================================================ */
 footer{margin-top:34px;text-align:center;font-size:.95rem;letter-spacing:.14em;color:var(--ocre);font-weight:300}
-footer span{display:block;margin-top:6px;letter-spacing:.04em;color:#a99f8a;font-size:.85rem}
+footer span{display:block;margin-top:6px;letter-spacing:.04em;color:#a99f8a;font-size:.85rem}  /* cada línea de abajo en gris */
 
-@media (prefers-reduced-motion:reduce){.link,.link *{transition:none}.link:hover,.link:focus-visible{transform:none}}
+/* ============================================================
+   7. ACCESIBILIDAD
+   Si el usuario pidió "reducir movimiento" en su celular o PC,
+   se desactivan las animaciones de los botones.
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  .link,.link *{transition:none}
+  .link:hover,.link:focus-visible{transform:none}
+}
 </style>
 </head>
 <body>
 
+<!-- ============================================================
+     BANDA SUPERIOR
+     Franja amarilla con curvas que imitan el kayak (inspirada en las
+     páginas de la guía de estilos). Es solo decoración, por eso tiene
+     aria-hidden="true": los lectores de pantalla la ignoran.
+     ============================================================ -->
 <div class="banda" aria-hidden="true">
+  <!-- Cada <path> es una curva; los colores son los de la paleta de marca -->
   <svg viewBox="0 0 560 104" preserveAspectRatio="xMaxYMin slice" xmlns="http://www.w3.org/2000/svg">
     <path d="M120 100 C 250 62, 400 30, 560 8 L560 70 C 420 82, 270 98, 120 100Z" fill="#D19F2A"/>
     <path d="M205 96 C 320 58, 440 22, 560 2 L560 30 C 450 48, 330 78, 205 96Z" fill="#EAAA21"/>
@@ -73,7 +201,18 @@ footer span{display:block;margin-top:6px;letter-spacing:.04em;color:#a99f8a;font
   </svg>
 </div>
 
+<!-- Contenedor central de la página -->
 <main>
+
+  <!-- ============================================================
+       LOGO
+       Es el archivo Logo_PI_Color.svg pegado directamente en el HTML
+       (no hace falta subir ninguna imagen aparte).
+       - viewBox recorta el logo para que quede centrado
+       - role="img" + aria-label = descripción para lectores de pantalla
+       - Las clases .pi0, .pi1... (dentro de su propio <style>) definen
+         los colores de cada parte del logo
+       ============================================================ -->
   <svg class="logo" viewBox="262 172 318 252" role="img" aria-label="Patagonia Infinita – Kayak &amp; Adventure, Villa La Angostura" xmlns="http://www.w3.org/2000/svg">
 <style>
 	.pi0{fill:#D29E0E;}
@@ -424,47 +563,74 @@ footer span{display:block;margin-top:6px;letter-spacing:.04em;color:#a99f8a;font
 
 </svg>
 
+  <!-- ============================================================
+       SECCIÓN LINKS
+       Cada <li> es un botón. Para agregar uno nuevo, copiá un <li>
+       completo y cambiá: href (destino), el <svg> (ícono),
+       class="t" (título) y class="s" (subtítulo).
+       - target="_blank" rel="noopener" → abre en una pestaña nueva
+         de forma segura (se quitó en Instagram y Facebook para evitar
+         que Samsung Internet redirija a la Play Store)
+       - aria-hidden="true" en el ícono → el lector de pantalla lee solo el texto
+       ============================================================ -->
   <ul class="links">
+
+    <!-- 1. WEBSITE (botón principal, relleno amarillo) -->
     <li>
       <a class="link principal" href="https://www.patagoniainfinita.com" target="_blank" rel="noopener">
         <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.8 2.7 4 5.7 4 9s-1.2 6.3-4 9c-2.8-2.7-4-5.7-4-9s1.2-6.3 4-9z"/></svg></span>
-        <span class="txt"><span class="t">Sitio web</span><span class="s">www.patagoniainfinita.com</span></span>
+        <span class="txt"><span class="t">Website</span><span class="s">www.patagoniainfinita.com</span></span>
       </a>
     </li>
+
+    <!-- 2. WHATSAPP: wa.me es el link oficial de WhatsApp; abre el chat directo -->
     <li>
       <a class="link" href="https://wa.me/message/PQUFJX4NZYPMB1" target="_blank" rel="noopener">
-        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.5z"/><path d="M9.4 8.6c.3 2.5 2.7 4.9 5.2 5.4l1.1-1.1-1.7-1-.8.7c-.9-.4-1.8-1.3-2.2-2.2l.7-.8-1-1.7-1.3.7z"/></svg></span>
-        <span class="txt"><span class="t">WhatsApp</span><span class="s">Enviar mensaje</span></span>
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 32 32" fill="currentColor" style="width:26px;height:26px"><path d="M26.576 5.363c-2.69-2.69-6.406-4.354-10.511-4.354-8.209 0-14.865 6.655-14.865 14.865 0 2.732 0.737 5.291 2.022 7.491l-0.038-0.070-2.109 7.702 7.879-2.067c2.051 1.139 4.498 1.809 7.102 1.809h0.006c8.209-0.003 14.862-6.659 14.862-14.868 0-4.103-1.662-7.817-4.349-10.507l0 0zM16.062 28.228h-0.005c-0 0-0.001 0-0.001 0-2.319 0-4.489-0.64-6.342-1.753l0.056 0.031-0.451-0.267-4.675 1.227 1.247-4.559-0.294-0.467c-1.185-1.862-1.889-4.131-1.889-6.565 0-6.822 5.531-12.353 12.353-12.353s12.353 5.531 12.353 12.353c0 6.822-5.53 12.353-12.353 12.353h-0zM22.838 18.977c-0.371-0.186-2.197-1.083-2.537-1.208-0.341-0.124-0.589-0.185-0.837 0.187-0.246 0.371-0.958 1.207-1.175 1.455-0.216 0.249-0.434 0.279-0.805 0.094-1.15-0.466-2.138-1.087-2.997-1.852l0.010 0.009c-0.799-0.74-1.484-1.587-2.037-2.521l-0.028-0.052c-0.216-0.371-0.023-0.572 0.162-0.757 0.167-0.166 0.372-0.434 0.557-0.65 0.146-0.179 0.271-0.384 0.366-0.604l0.006-0.017c0.043-0.087 0.068-0.188 0.068-0.296 0-0.131-0.037-0.253-0.101-0.357l0.002 0.003c-0.094-0.186-0.836-2.014-1.145-2.758-0.302-0.724-0.609-0.625-0.836-0.637-0.216-0.010-0.464-0.012-0.712-0.012-0.395 0.010-0.746 0.188-0.988 0.463l-0.001 0.002c-0.802 0.761-1.3 1.834-1.3 3.023 0 0.026 0 0.053 0.001 0.079l-0-0.004c0.131 1.467 0.681 2.784 1.527 3.857l-0.012-0.015c1.604 2.379 3.742 4.282 6.251 5.564l0.094 0.043c0.548 0.248 1.25 0.513 1.968 0.74l0.149 0.041c0.442 0.14 0.951 0.221 1.479 0.221 0.303 0 0.601-0.027 0.889-0.078l-0.031 0.004c1.069-0.223 1.956-0.868 2.497-1.749l0.009-0.017c0.165-0.366 0.261-0.793 0.261-1.242 0-0.185-0.016-0.366-0.047-0.542l0.003 0.019c-0.092-0.155-0.34-0.247-0.712-0.434z"/></svg></span>
+        <span class="txt"><span class="t">WhatsApp</span><span class="s">Send a message</span></span>
       </a>
     </li>
+
+    <!-- 3. INSTAGRAM -->
     <li>
       <a class="link" href="https://www.instagram.com/patagonia_infinita/">
         <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span>
         <span class="txt"><span class="t">Instagram</span><span class="s">@patagonia_infinita</span></span>
       </a>
     </li>
+
+    <!-- 4. FACEBOOK -->
     <li>
       <a class="link" href="https://www.facebook.com/patagoniainfinitakayak">
         <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8.5h2.5V5H14a3.5 3.5 0 0 0-3.5 3.5V11H8v3.5h2.5V21H14v-6.5h2.5L17 11h-3V8.5z"/></svg></span>
         <span class="txt"><span class="t">Facebook</span><span class="s">Patagonia Infinita Kayak</span></span>
       </a>
     </li>
+
+    <!-- 5. TRIPADVISOR: el texto gris muestra la dirección corta, pero el botón
+         lleva a la página real de la actividad (el href) -->
     <li>
       <a class="link" href="https://www.tripadvisor.com/Attraction_Review-g312844-d4039849-Reviews-Patagonia_Infinita-Villa_La_Angostura_Province_of_Neuquen_Patagonia.html" target="_blank" rel="noopener">
-        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 16.9l-5.25 2.8 1-5.85L3.5 9.7l5.9-.9L12 3.5z"/></svg></span>
-        <span class="txt"><span class="t">Opiniones</span><span class="s">Patagonia Infinita en TripAdvisor</span></span>
+        <span class="ico" aria-hidden="true"><svg viewBox="0 -96 512.2 512.2" fill="currentColor" style="width:30px;height:30px"><path d="M128.2 127.9C92.7 127.9 64 156.6 64 192c0 35.4 28.7 64.1 64.1 64.1 35.4 0 64.1-28.7 64.1-64.1.1-35.4-28.6-64.1-64-64.1zm0 110c-25.3 0-45.9-20.5-45.9-45.9s20.5-45.9 45.9-45.9S174 166.7 174 192s-20.5 45.9-45.8 45.9z"/><circle cx="128.4" cy="191.9" r="31.9"/><path d="M384.2 127.9c-35.4 0-64.1 28.7-64.1 64.1 0 35.4 28.7 64.1 64.1 64.1 35.4 0 64.1-28.7 64.1-64.1 0-35.4-28.7-64.1-64.1-64.1zm0 110c-25.3 0-45.9-20.5-45.9-45.9s20.5-45.9 45.9-45.9S430 166.7 430 192s-20.5 45.9-45.8 45.9z"/><circle cx="384.4" cy="191.9" r="31.9"/><path d="M474.4 101.2l37.7-37.4h-76.4C392.9 29 321.8 0 255.9 0c-66 0-136.5 29-179.3 63.8H0l37.7 37.4C14.4 124.4 0 156.5 0 192c0 70.8 57.4 128.2 128.2 128.2 32.5 0 62.2-12.1 84.8-32.1l43.4 31.9 42.9-31.2-.5-1.2c22.7 20.2 52.5 32.5 85.3 32.5 70.8 0 128.2-57.4 128.2-128.2-.1-35.4-14.6-67.5-37.9-90.7zM368 64.8c-60.7 7.6-108.3 57.6-111.9 119.5-3.7-62-51.4-112.1-112.3-119.5 30.6-22 69.6-32.8 112.1-32.8S337.4 42.8 368 64.8zM128.2 288.2C75 288.2 32 245.1 32 192s43.1-96.2 96.2-96.2 96.2 43.1 96.2 96.2c-.1 53.1-43.1 96.2-96.2 96.2zm256 0c-53.1 0-96.2-43.1-96.2-96.2s43.1-96.2 96.2-96.2 96.2 43.1 96.2 96.2c-.1 53.1-43.1 96.2-96.2 96.2z"/></svg></span>
+        <span class="txt"><span class="t">TripAdvisor</span><span class="s">tripadvisor.com/patagoniainfinitakayak</span></span>
       </a>
     </li>
+
+    <!-- 6. EMAIL: "mailto:" abre la app de correo del usuario con el destinatario cargado -->
     <li>
       <a class="link" href="mailto:patagoniainfinita@gmail.com">
         <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M4 7.5l8 6 8-6"/></svg></span>
-        <span class="txt"><span class="t">Escribinos</span><span class="s">patagoniainfinita@gmail.com</span></span>
+        <span class="txt"><span class="t">Email us</span><span class="s">patagoniainfinita@gmail.com</span></span>
       </a>
     </li>
   </ul>
 
-  <footer>KAYAK &amp; ADVENTURE<span>Villa La Angostura, Neuquén</span></footer>
-</main>
+  <!-- ============================================================
+       PIE DE PÁGINA
+       Cada <span> es una línea: ubicación y derechos reservados
+       ============================================================ -->
+  <footer>KAYAK &amp; ADVENTURE<span>Villa La Angostura, Neuquén</span><span>Patagonia Infinita All Rights Reserved Est. 2005</span></footer>
+</main> <!-- fin del contenedor central -->
 
 </body>
 </html>
